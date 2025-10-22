@@ -1,0 +1,38 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <algorithm>
+#include <Windows.h>
+#include <string>
+
+using namespace std;
+
+bool comparePairs(pair<char, int>& a, pair<char, int>& b) {
+    return a.second > b.second;
+}
+
+int main() {
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+    setlocale(LC_ALL, "ru");
+    string text = "ПОСТАВИВ БУТЫЛКУ НА ПОДОКОННИК ЧТОБЫ БЫЛО УДОБНО ДОСТАТЬ ЕЕ ДОЛОХОВ ОСТОРОЖНО И ТИХО ПОЛЕЗ В ОКНО СПУСТИВ НОГИ И РАСПЕРЕВШИСЬ ОБЕИМИ РУКАМИ В КРАЯ ОКНА ОН ПРИМЕРИЛСЯ УСЕЛСЯ ОПУСТИЛ РУКИ ПОДВИНУЛСЯ НАПРАВО НАЛЕВО И ДОСТАЛ БУТЫЛКУ АНАТОЛЬ ПРИНЕС ДВЕ СВЕЧКИ И ПОСТАВИЛ ИХ НА ПОДОКОННИК ХОТЯ БЫЛО УЖЕ СОВСЕМ СВЕТЛО СПИНА ДОЛОХОВА В БЕЛОЙ РУБАШКЕ И КУРЧАВАЯ ГОЛОВА ЕГО БЫЛИ ОСВЕЩЕНЫ С ОБЕИХ СТОРОН ВСЕ СТОЛПИЛИСЬ У ОКНА АНГЛИЧАНИН СТОЯЛ ВПЕРЕДИ ПЬЕР УЛЫБАЛСЯ И НИЧЕГО НЕ ГОВОРИЛ ОДИН ИЗ ПРИСУТСТВУЮЩИХ ПОСТАРШЕ ДРУГИХ С ИСПУГАННЫМ И СЕРДИТЫМ ЛИЦОМ ВДРУГ ПРОДВИНУЛСЯ ВПЕРЕД И ХОТЕЛ СХВАТИТЬ ДОЛОХОВА ЗА РУБАШКУ";
+    map<char, int> SymbolsAndCount;
+
+    for (char ch : text) {
+        SymbolsAndCount[ch]++;
+    }
+
+    vector<pair<char, int>> BUFFER(SymbolsAndCount.begin(), SymbolsAndCount.end());
+
+    sort(BUFFER.begin(), BUFFER.end(), comparePairs);
+
+    cout << "Количество вхождений каждого символа (по убыванию): " << endl;
+    for (auto& pair : BUFFER) {
+        cout << "'" << pair.first << "': " << pair.second << endl;
+    }
+
+    int TotalSymbolsCount = text.size();
+    cout << "Общее количество символов -> " << TotalSymbolsCount << endl;
+
+    return 0;
+}
